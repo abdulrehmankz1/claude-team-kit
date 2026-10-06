@@ -1,0 +1,21 @@
+{
+  ".claude/agents/backend-dev.md": "d9d5bbcde67fbaee013100fdc982b3a807fc3afd6b7be1252520e0b6c206c4e6",
+  ".claude/agents/code-reviewer.md": "d0c78f7fe17921e4cce7ecf8e9524187f4340e524b38270e95e07fb923e3f1cf",
+  ".claude/agents/creative-director.md": "ff5aaf26d554be310e04aec13d22daf2405680c951756332367ec924f7642f73",
+  ".claude/agents/cyber-security.md": "2b25483917657ac03b675039d098002e780ecc213608a3439a4addd11dc9d707",
+  ".claude/agents/figma-analyst.md": "ad70d1258ce3393955b8491d9f4288d647d669cf7670ea0931d4722013d1ef0f",
+  ".claude/agents/frontend-dev-2.md": "78ff53ecb6eef9c98f8c1d92e98c017faba58aadfc22f388d509e9f9771eb7a6",
+  ".claude/agents/frontend-dev.md": "b486960158007227a6ffe15241e65d0a8f01ceafff176bfc79edfbd818b49ca3",
+  ".claude/agents/motion-dev.md": "615a15f7721ea9a31b8920295b74b3d7aa5646c5de4880e7cda37400eceaa95d",
+  ".claude/agents/qa-tester.md": "9ffb18b7becb24b6accde2097ade845413de18e1ceec1b0a494303061ce0043f",
+  ".claude/agents/qa-visual.md": "5f07fb447c61ae8b6b9f41168c1c92064dfe0e9e8cfe832902026d179c565df9",
+  ".claude/agents/security-reviewer.md": "71d815c25724294c2f8bf142772ac725fa378bd6231ab1ea17ee6886de2d5372",
+  ".claude/agents/senior-dev.md": "75b6f4b2e98610f3c99d1eaaca6e4489714cc644ef55a1b698307ba01818673d",
+  ".claude/settings.json": "26ea4c65bf639bea81ab72f865a65f6a0e75dd171aeae43c90668c393aa79c94",
+  ".claude/settings.local.json": "4bd9f96781f086d99387b9add0da29987f7e29c4dcfb7008d1aa3bcc89087d30",
+  ".claude/team/PM-PLAYBOOK.md": "28a662050e10fea2e026bd09b185e05d5422aedbcf48aa8e18e2e93da01463b5",
+  ".claude/team/PROJECT-PROFILE.md": "52c006c138694e69f03136a0d7731318a5733d2aab1badcf62c810b1d15cd4fd",
+  ".claude/team/PROJECT-PROFILE.template.md": "b527e1c881751cfea3ea52612d06b2186ecd7befb9d80d717d95359b567910eb",
+  ".claude/team/STATE.md": "9ec53ef4d9503d0d022b45b870ca0c20e587714d7beb914af1fafaef077bea2b",
+  ".claude/team/STATE.template.md": "1f4cb284b8b399bd0e9ab500eb22bfe9defbee2a9f602058c35b8daa04083cbd"
+}

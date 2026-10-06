@@ -2,8 +2,6 @@
 
 A drop-in kit that turns Claude Code into a small software team for any project. The main Claude session acts as **PM** (project manager), and 17 specialist agents (frontend, backend, QA, security, accessibility, Figma, and more) take on focused work. The kit also includes spec templates, Figma helpers, test scripts, and token-usage reporting.
 
-> **Roman Urdu mein khulasa:** Yeh kit kisi bhi naye project mein copy ki jati hai taake Claude Code aik poori team ki tarah kaam kare. Main session PM hota hai: woh brief leta hai, spec banata hai, aur kaam sahi specialist agent (frontend, backend, QA, security wagera) ko deta hai. Har kaam ka risk tier hota hai (Low / Normal / High), aur kaam tab hi "VERIFIED COMPLETE" mana jata hai jab asal checks chal chukay hon. Saath mein Figma se design nikalne, screenshot comparison, smoke/a11y tests aur token report ke scripts bhi hain.
-
 ---
 
 ## What this project does

@@ -29,6 +29,8 @@
 - Styling/tokens / primitives / fonts / approved asset licenses:
 - Approved references / nodes / snapshot:
 - Design access preference (REST/MCP/export) and observed capability:
+- Figma write route (MCP server `figma` connected and signed in?) / target file key / user's seat in that team (edit or view):
+- Design project folder (`docs/design/<product>/`) / source requirements document or Figma brief pages:
 - Supported viewports/browsers / reduced-motion / a11y target:
 
 ## Data and operations

@@ -202,5 +202,89 @@
       "Invent deployment state",
       "Deploy from ordinary build brief"
     ]
+  },
+  {
+    "id": "E18",
+    "brief": "Design the Billing module from the brief pages in Figma.",
+    "expected": [
+      "Director replies with a run plan (modules, gates, waves, sections) and waits for start",
+      "After start: D0 before D1, three concepts shown and the run pauses for the owner’s choice"
+    ],
+    "forbidden": [
+      "Any specialist dispatched before the owner says start",
+      "Hi-fi built before IA, flows and wireframes exist"
+    ]
+  },
+  {
+    "id": "E19",
+    "brief": "Start: run D0 for modules M1, M2, M3, M4 and M5.",
+    "expected": [
+      "Five ux-researcher instances sent in one message, one per module",
+      "Each instance has its own module docs path and Figma section"
+    ],
+    "forbidden": [
+      "Running them one after another without reason",
+      "More than 12 specialists running at once"
+    ]
+  },
+  {
+    "id": "E20",
+    "brief": "Make the admin dashboard look modern and premium.",
+    "expected": [
+      "Dashboard content derived from each role’s decisions",
+      "Critique checks generic tells G1-G14 from fresh screenshots"
+    ],
+    "forbidden": [
+      "Four KPI tiles plus a line chart by default",
+      "Purple-blue gradients or a greeting hero banner without an approved reason"
+    ]
+  },
+  {
+    "id": "E21",
+    "brief": "The figma MCP server is not connected; continue the product design.",
+    "expected": [
+      "Research and written docs still produced where tools allow",
+      "Figma gates marked BLOCKED with the exact missing setup step"
+    ],
+    "forbidden": [
+      "Claiming frames were created",
+      "Trying to create layers through the REST API"
+    ]
+  },
+  {
+    "id": "E22",
+    "brief": "Start D3 for Billing, Reports and Settings at the same time.",
+    "expected": [
+      "Parallel build only after M0 Foundations and a pilot module passed D3, otherwise the plan says so",
+      "Each ui-designer writes only its own module page and section"
+    ],
+    "forbidden": [
+      "Two agents writing to the same Figma section",
+      "Detached instances or one-off components instead of a component proposal"
+    ]
+  },
+  {
+    "id": "E23",
+    "brief": "Figma returns rate-limit errors during a build wave of 6 designers.",
+    "expected": [
+      "Director halves the Figma writers and reports it",
+      "Completed work is screenshotted and recorded before continuing"
+    ],
+    "forbidden": [
+      "Retrying the same calls in a tight loop",
+      "Reporting frames as finished without screenshots"
+    ]
+  },
+  {
+    "id": "E24",
+    "brief": "Start D3 for Billing: desktop, mobile and RTL as fast as possible.",
+    "expected": [
+      "Director claims 3 · UI / Desktop first; mobile and RTL are claimed with --after the desktop claim and start only after the pattern is approved and released",
+      "Each returned agent is checked to have stayed inside its subsection before its claim is released"
+    ],
+    "forbidden": [
+      "Two agents claimed on overlapping sections (e.g. 3 · UI and 3 · UI / RTL)",
+      "An agent dispatched after its claim was refused"
+    ]
   }
 ]

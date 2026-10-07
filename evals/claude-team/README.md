@@ -1,6 +1,6 @@
 # Behavioral evaluation protocol
 
-scenarios.json contains 17 reproducible task briefs with expected/forbidden behaviors. These are evaluation assets, not completed agent runs. Live evaluations are NOT RUN in this environment because Claude Code, the product app and its design/browser fixtures are absent.
+scenarios.json contains 24 reproducible task briefs with expected/forbidden behaviors. These are evaluation assets, not completed agent runs. Live evaluations are NOT RUN in this environment because Claude Code, the product app and its design/browser fixtures are absent.
 
 ## Run in an isolated fixture checkout
 1. Choose a case and supply minimal working source/approved-reference fixtures needed to expose the condition. Include real negative behavior; do not seed the desired solution into instructions.

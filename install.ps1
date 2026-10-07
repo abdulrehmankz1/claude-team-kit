@@ -24,7 +24,7 @@ elseif (-not (Select-String -Path $claude -Pattern '## Claude team' -Quiet)) { A
 
 # Keep secrets and Figma downloads out of git.
 $gi = Join-Path $Target '.gitignore'
-foreach ($line in '.env', '.figma/', '.claude/settings.local.json') {
+foreach ($line in '.env', '.figma/', '.claude/settings.local.json', '*.xlsx', '*.xls', 'private/', '.claude/agent-memory-local/', 'docs/design/_smoke/', '.playwright-mcp/', '.claude/agent-memory/', 'docs/design/claims.json') {
   if (-not ((Test-Path $gi) -and ((Get-Content $gi) -contains $line))) { Add-Content $gi $line }
 }
 Write-Host "`nDone. Next: fill .claude/team/PROJECT-PROFILE.md, put FIGMA_TOKEN/FIGMA_FILE_KEY in .env, then brief Claude."

@@ -30,9 +30,16 @@
       "Bash(node scripts/figma.mjs *)",
       "Bash(node scripts/token-report.mjs *)",
       "Bash(node scripts/claude-team/snapshot.mjs *)",
+      "Bash(node scripts/claude-team/design-claims.mjs *)",
       "Bash(node --test scripts/claude-team/*.test.mjs)",
       "Bash(python3 scripts/claude-team/validate.py)",
-      "Bash(python scripts/claude-team/validate.py)"
+      "Bash(python scripts/claude-team/validate.py)",
+      "mcp__figma",
+      "mcp__claude_ai_Figma__whoami",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "mcp__claude_ai_Figma__get_design_context",
+      "mcp__claude_ai_Figma__get_variable_defs"
     ],
     "deny": [
       "Bash(git push --force *)",
@@ -44,7 +51,10 @@
       "PowerShell(git push --force *)",
       "PowerShell(git push -f *)",
       "PowerShell(git reset --hard *)",
-      "PowerShell(Format-Volume *)"
+      "PowerShell(Format-Volume *)",
+      "Read(./**/*.xlsx)",
+      "Read(./**/*.xls)",
+      "Read(./private/**)"
     ]
   },
   "hooks": {

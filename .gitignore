@@ -1,3 +1,17 @@
 .env
 .figma/
 .claude/settings.local.json
+
+# Design studio: real data never enters the repo
+*.xlsx
+*.xls
+private/
+.claude/agent-memory-local/
+docs/design/_smoke/
+
+# Playwright MCP screenshots and console logs
+.playwright-mcp/
+
+# Design studio runtime state
+.claude/agent-memory/
+docs/design/claims.json

@@ -30,6 +30,8 @@ Record installed Claude version and observed tools/capabilities in the profile. 
 | release-engineer | Local release/CI/environment readiness and rollback preparation |
 | prompt-engineer | Agent instructions, runtime compatibility and behavioral evaluation |
 
+For UI/UX design briefs (a requirements document to be designed in Figma), switch to `.claude/team/DESIGN-PLAYBOOK.md` and the 17-agent design studio led by design-director. Design specialists run only after the owner says start, up to 12 at once.
+
 Do not invoke every specialist for every task. Keep the original model aliases; quality-first can use opus for complex implementation, economy can keep sonnet implementations. Change routing deliberately and record model conditions in evals. Do not trade away essential evidence for token savings.
 
 ## 3. One risk-based gate policy

@@ -12,9 +12,12 @@ except ImportError:
     sys.exit(2)
 
 EXPECTED = set('backend-dev code-reviewer creative-director cyber-security figma-analyst frontend-dev-2 frontend-dev motion-dev qa-tester qa-visual security-reviewer senior-dev system-design-architect prompt-engineer accessibility-specialist performance-engineer release-engineer'.split())
+DESIGN = set('design-director ux-researcher information-architect ux-writer design-system-designer mobile-designer localisation-designer data-viz-designer design-handoff-specialist product-designer ui-designer motion-designer edge-case-specialist qa-usability-lead design-system-auditor accessibility-localisation-auditor product-logic-compliance-auditor'.split())
+EXPECTED |= DESIGN
+DESIGN_FIELDS = {'mcpServers','effort','memory','color','maxTurns'}
 READ_ONLY = {'senior-dev', 'code-reviewer', 'security-reviewer'}
 INHERITED_TESTERS = {'qa-visual', 'accessibility-specialist', 'performance-engineer'}
-TOOLS = set('Read Write Edit Glob Grep Bash Skill WebSearch WebFetch ToolSearch NotebookEdit Agent'.split())
+TOOLS = set('Read Write Edit Glob Grep Bash Skill WebSearch WebFetch ToolSearch NotebookEdit Agent TodoWrite'.split())
 OPTIONAL = {'scripts/figma.mjs', 'scripts/token-report.mjs'}
 
 class UniqueLoader(yaml.SafeLoader):
@@ -41,7 +44,8 @@ def unique_json(pairs):
 def split_tools(value):
     if not isinstance(value, str):
         raise ValueError('tool fields must be comma-separated strings in this kit')
-    return {p.strip() for p in value.split(',') if p.strip()}
+    # Split on commas outside parentheses so Agent(a, b) stays one entry.
+    return {p.strip() for p in re.split(r',(?![^()]*\))', value) if p.strip()}
 
 def validate(root):
     errors = []
@@ -62,13 +66,21 @@ def validate(root):
             require(isinstance(meta, dict), f'{p.name}: invalid metadata')
             if not isinstance(meta, dict):
                 continue
-            require(set(meta) <= {'name','description','model','tools','disallowedTools'}, f'{p.name}: unexpected frontmatter fields in supported subset')
+            allowed_fields = {'name','description','model','tools','disallowedTools'} | (DESIGN_FIELDS if p.stem in DESIGN else set())
+            require(set(meta) <= allowed_fields, f'{p.name}: unexpected frontmatter fields in supported subset')
             require(meta.get('name') == p.stem, f'{p.name}: mismatched invocation name')
             require(isinstance(meta.get('description'), str) and bool(meta['description'].strip()), f'{p.name}: empty routing description')
-            require(meta.get('model') in {'sonnet','opus','haiku','inherit'}, f'{p.name}: unsupported model alias')
+            require(meta.get('model') in {'sonnet','opus','haiku','fable','inherit'}, f'{p.name}: unsupported model alias')
             listed = split_tools(meta['tools']) if 'tools' in meta else set()
             denied = split_tools(meta['disallowedTools']) if 'disallowedTools' in meta else set()
-            require(not ((listed | denied)-TOOLS), f'{p.name}: unknown tool name')
+            spawn = {x for x in listed if x.startswith('Agent(')}
+            if spawn:
+                # Only the design director, run as the main thread, may name the specialists it spawns.
+                require(p.stem == 'design-director', f'{p.name}: only design-director may list Agent(...)')
+                for entry in spawn:
+                    names = {n.strip() for n in entry[6:-1].split(',')}
+                    require(names <= DESIGN - {'design-director'}, f'{p.name}: Agent(...) names unknown or non-design agents')
+            require(not ((listed - spawn | denied)-TOOLS), f'{p.name}: unknown tool name')
             require('Agent' not in listed, f'{p.name}: nested delegation not part of flat policy')
             if p.stem in READ_ONLY:
                 require(bool(listed) and not listed & {'Bash','Write','Edit','NotebookEdit','Agent'}, f'{p.name}: read-only reviewer has execution/write tools')
@@ -105,7 +117,7 @@ def validate(root):
                         require(h.get('timeout') == 10, 'SessionStart: bounded timeout required')
         except (ValueError, OSError, TypeError) as exc:
             errors.append(f'{p.name}: {exc}')
-    for required in ['.claude/settings.json','.claude/settings.local.json','.claude/hooks/session-start.mjs','CLAUDE.md','.claude/team/ENGINEERING-STANDARDS.md','.claude/team/PM-PLAYBOOK.md','.claude/team/PROJECT-PROFILE.md','.claude/team/STATE.md','.claude/team/HANDOFF.template.md','.claude/team/references/FRONTEND-CRAFT.md','.claude/team/references/NEXTJS.md','specs/_template/requirements.md','specs/_template/design.md','specs/_template/tasks.md','evals/claude-team/scenarios.json']:
+    for required in ['.claude/settings.json','.claude/settings.local.json','.claude/hooks/session-start.mjs','CLAUDE.md','.claude/team/ENGINEERING-STANDARDS.md','.claude/team/PM-PLAYBOOK.md','.claude/team/PROJECT-PROFILE.md','.claude/team/STATE.md','.claude/team/HANDOFF.template.md','.claude/team/references/FRONTEND-CRAFT.md','.claude/team/references/NEXTJS.md','.claude/team/DESIGN-PLAYBOOK.md','.claude/team/DESIGN-STANDARDS.md','.claude/team/references/FIGMA-BUILD.md','.claude/team/DESIGN-STUDIO.md','docs/design/STUDIO-PLAYBOOK.md','docs/design/STUDIO-SETUP.md','docs/design/projects/TEMPLATE-PROJECT.md','specs/_template/requirements.md','specs/_template/design.md','specs/_template/tasks.md','evals/claude-team/scenarios.json']:
         require((root/required).is_file(), f'missing required file: {required}')
     # Resolve canonical .claude Markdown references, not arbitrary prose filenames.
     for p in root.rglob('*.md'):
@@ -138,5 +150,5 @@ if __name__ == '__main__':
     if failures:
         print('FAIL\n' + '\n'.join(failures))
         sys.exit(1)
-    print('PASS: 17 agent definitions, YAML/JSON structure, permissions, hook config, imports/references and evaluation schema.')
+    print('PASS: 34 agent definitions (17 development, 17 design), YAML/JSON structure, permissions, hook config, imports/references and evaluation schema.')
     print('Static kit-subset checks only. Claude loading and live behavioral evaluations are NOT RUN.')

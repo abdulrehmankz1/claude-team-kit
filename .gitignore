@@ -15,3 +15,4 @@ docs/design/_smoke/
 # Design studio runtime state
 .claude/agent-memory/
 docs/design/claims.json
+.claude/office/

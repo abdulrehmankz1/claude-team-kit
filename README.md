@@ -126,6 +126,7 @@ Designing in Figma therefore **requires the Figma MCP**, connected under the ser
     *.template.md           Blank templates for profile, state, handoff
     references/             FRONTEND-CRAFT.md, NEXTJS.md, FIGMA-BUILD.md
   hooks/session-start.mjs   Loads STATE.md into the session
+  hooks/office-event.mjs    Optional: logs short agent activity labels to .claude/office/ for the live office
   settings.json             Permissions and hook config
 specs/_template/        requirements, design, tasks, slice-brief, qa-report
 reports/                work-log.jsonl, FINAL-REPORT.template.md, token reports
@@ -133,7 +134,7 @@ scripts/
   figma.mjs             Figma REST helper (pages, nodes, images, styles, svg)
   visual-diff.mjs       App screenshot vs Figma render pixel diff
   token-report.mjs      Token usage report from Claude Code transcripts
-  claude-team/          Kit validator, snapshot hasher, design work-claims register, tests
+  claude-team/          Kit validator, snapshot hasher, design work-claims register, live office, tests
 tests/
   smoke.mjs             Route smoke test at 1440px and 390px
   a11y.mjs              Keyboard and axe accessibility spot checks
@@ -162,7 +163,21 @@ powershell -ExecutionPolicy Bypass -File <path-to>\claude-team-kit\install.ps1 -
 The installer:
 - copies every kit file and **skips files that already exist** (it never overwrites),
 - creates `CLAUDE.md`, or appends the team section from `CLAUDE.kit.md` to an existing one,
-- adds `.env`, `.figma/`, `.claude/settings.local.json`, spreadsheets and `private/` to `.gitignore`.
+- adds `.env`, `.figma/`, `.claude/settings.local.json`, spreadsheets and `private/` to `.gitignore`,
+- asks whether you want the optional **live office** (pass `-Office yes` or `-Office no` to skip the question).
+
+## Live office (optional)
+
+A pixel-art tower in your browser where every agent has a desk that lights up while it works, shows what it is doing, and flags when it is waiting for your approval. It is **off by default**. Turning it on only changes your own gitignored `.claude/settings.local.json`, so each person who clones the kit decides for themselves and teammates are never affected.
+
+```bash
+node scripts/claude-team/office.mjs enable    # turn it on for you, then restart Claude Code
+node scripts/claude-team/office.mjs           # open http://localhost:4317
+node scripts/claude-team/office.mjs status    # ON or OFF
+node scripts/claude-team/office.mjs disable   # turn it off; your other local settings stay
+```
+
+The hooks record only short labels such as `Edit Header.tsx` or a shell command's description, never prompts, file contents or raw commands. Events stay in `.claude/office/` (gitignored) and the page is served on localhost only. Preview it without running anything: open `docs/office.html?demo`.
 
 You can also copy the folder contents into the project root by hand. If the project already has a `.claude/` folder or settings, merge them rather than replacing them (see `docs/claude-team/ONBOARDING.md`).
 
@@ -191,6 +206,10 @@ node tests/a11y.mjs --screens /,/about
 node scripts/token-report.mjs [--session <id>] [--since <ISO date>]
 node scripts/claude-team/snapshot.mjs <paths...>   # hash files under review
 node scripts/claude-team/design-claims.mjs list    # who is working on which design section
+
+# Live office (optional, see above): enable | disable | status, or serve at http://localhost:4317
+node scripts/claude-team/office.mjs [enable|disable|status] [--port 4317]
+# after editing the tower, refresh the landing page copy: cp scripts/claude-team/office.html docs/office.html
 
 # Validate the kit itself
 python scripts/claude-team/validate.py

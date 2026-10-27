@@ -36,6 +36,8 @@
       "Bash(node scripts/token-report.mjs *)",
       "Bash(node scripts/claude-team/snapshot.mjs *)",
       "Bash(node scripts/claude-team/design-claims.mjs *)",
+      "Bash(node scripts/claude-team/office.mjs)",
+      "Bash(node scripts/claude-team/office.mjs *)",
       "Bash(node --test scripts/claude-team/*.test.mjs)",
       "Bash(python3 scripts/claude-team/validate.py)",
       "Bash(python scripts/claude-team/validate.py)",

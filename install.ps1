@@ -5,7 +5,7 @@ param([Parameter(Mandatory = $true)][string]$Target, [ValidateSet('ask', 'yes', 
 
 $kit = $PSScriptRoot
 if (-not (Test-Path $Target)) { Write-Error "Target not found: $Target"; exit 1 }
-$skip = @('install.ps1', 'README.md', 'CLAUDE.kit.md', 'docs\index.html', 'docs\office.html')
+$skip = @('install.ps1', 'README.md', 'CLAUDE.kit.md', 'docs\index.html', 'docs\office.html', 'docs\office-demo.gif')
 
 Get-ChildItem -Path $kit -Recurse -File -Force | ForEach-Object {
   $rel = $_.FullName.Substring($kit.Length + 1)

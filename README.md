@@ -168,7 +168,11 @@ The installer:
 
 ## Live office (optional)
 
-A pixel-art tower in your browser where every agent has a desk that lights up while it works, shows what it is doing, and flags when it is waiting for your approval. It is **off by default**. Turning it on only changes your own gitignored `.claude/settings.local.json`, so each person who clones the kit decides for themselves and teammates are never affected.
+A pixel-art tower in your browser where every agent has a desk that lights up while it works, shows what it is doing, and flags when it is waiting for your approval. It is **off by default**.
+
+![Live office demo: the PM takes a brief, the design studio works through its gates, the dev team builds and QA verifies](docs/office-demo.gif)
+
+ Turning it on only changes your own gitignored `.claude/settings.local.json`, so each person who clones the kit decides for themselves and teammates are never affected.
 
 ```bash
 node scripts/claude-team/office.mjs enable    # turn it on for you, then restart Claude Code

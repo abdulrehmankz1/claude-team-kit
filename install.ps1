@@ -9,6 +9,8 @@ $skip = @('install.ps1', 'README.md', 'CLAUDE.kit.md', 'docs\index.html', 'docs\
 
 Get-ChildItem -Path $kit -Recurse -File -Force | ForEach-Object {
   $rel = $_.FullName.Substring($kit.Length + 1)
+  # Never copy the kit's own repository (or local installs): the target would inherit its history and remote.
+  if ($rel -eq '.git' -or $rel -like '.git\*' -or $rel -like 'node_modules\*') { return }
   if ($skip -contains $rel) { return }
   $dest = Join-Path $Target $rel
   if (Test-Path $dest) { Write-Host "skip (exists) $rel"; return }

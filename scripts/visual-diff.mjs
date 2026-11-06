@@ -6,11 +6,12 @@
 // Output: .screens/<id>.png (app), .screens/<id>-diff.png (red = mismatch), .screens/<id>-side.png (figma | app), mismatch %.
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const bi = args.indexOf('--base');
 const base = bi > -1 ? args.splice(bi, 2)[1] : 'http://localhost:3000';
